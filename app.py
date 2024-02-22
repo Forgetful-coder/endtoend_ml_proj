@@ -3,9 +3,11 @@ import numpy as np
 import pandas as pd
 from src.exception import CustomException
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
+from src.pipeline.training_pipeline import TrainPipeline
 
 application = Flask(__name__)
 app = application
+train_pipeline = TrainPipeline()
 
 # Home page
 @app.route('/')
@@ -27,6 +29,8 @@ def predict_datapoint():
             reading_score=float(request.form.get('reading_score'))
             
         )
+        
+        #train_pipeline.train()
         pred_df = datapoint.get_data_as_data_frame()
         print(pred_df)
         predict_pipeline = PredictPipeline()
